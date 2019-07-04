@@ -244,7 +244,7 @@ $app->post("/checkout", function(){
 
 	$cart = Cart::getFromSession();
 
-	$totals = $cart->getCalculateTotal();
+	$cart->getCalculateTotal();
 
 	$order = new Order();
 
@@ -253,7 +253,7 @@ $app->post("/checkout", function(){
 		'idaddress'=>$address->getidaddress(),
 		'iduser'=>$user->getiduser(),
 		'idstatus'=>OrderStatus::EM_ABERTO,
-		'vltotal'=>$totals['vlprice'] + $cart->getvlfreight()
+		'vltotal'=> $cart->getvltotal()
 	]);
 
 	$order->save();
@@ -511,7 +511,7 @@ $app->get("/boleto/:idorder", function($idorder){
 	$dias_de_prazo_para_pagamento = 10;
 	$taxa_boleto = 5.00;
 	$data_venc = date("d/m/Y", time() + ($dias_de_prazo_para_pagamento * 86400));  // Prazo de X dias OU informe data: "13/04/2006"; 
-	$valor_cobrado = formatPrice($order->getvltotal()); // Valor - REGRA: Sem pontos na milhar e tanto faz com "." ou "," ou com 1 ou 2 ou sem casa decimal
+	$valor_cobrado = $order->getvltotal(); // Valor - REGRA: Sem pontos na milhar e tanto faz com "." ou "," ou com 1 ou 2 ou sem casa decimal
 	$valor_cobrado = str_replace(",", ".",$valor_cobrado);
 	$valor_boleto=number_format($valor_cobrado+$taxa_boleto, 2, ',', '');
 
@@ -524,22 +524,22 @@ $app->get("/boleto/:idorder", function($idorder){
 
 	// DADOS DO SEU CLIENTE
 	$dadosboleto["sacado"] = $order->getdesperson();
-	$dadosboleto["endereco1"] = $order->getdesaddress() . " " . $order->getdesdistrict();
+	$dadosboleto["endereco1"] = $order->getdesaddress() . " - " . $order->getdesdistrict();
 	$dadosboleto["endereco2"] = $order->getdescity() . " - " . $order->getdesstate() . " - " . $order->getdescountry() . " - CEP: " . $order->getdeszipcode();
 
 	// INFORMACOES PARA O CLIENTE
 	$dadosboleto["demonstrativo1"] = "Pagamento de Compra na Loja Sahevi Store";
-	$dadosboleto["demonstrativo2"] = "Taxa bancária - R$ 0,00";
+	$dadosboleto["demonstrativo2"] = "Taxa bancária - R$ 5,00";
 	$dadosboleto["demonstrativo3"] = "";
 	$dadosboleto["instrucoes1"] = "- Sr. Caixa, cobrar multa de 2% após o vencimento";
-	$dadosboleto["instrucoes2"] = "- Receber até 10 dias após o vencimento";
+	$dadosboleto["instrucoes2"] = "- Não receber após o vencimento";
 	$dadosboleto["instrucoes3"] = "- Em caso de dúvidas entre em contato conosco: contato@sahevistore.tk";
-	$dadosboleto["instrucoes4"] = "&nbsp; Emitido pelo sistema Sahevi Store www.sahevistore.tk";
+	$dadosboleto["instrucoes4"] = "- Emitido pelo sistema Sahevi Store - www.sahevistore.tk";
 
 	// DADOS OPCIONAIS DE ACORDO COM O BANCO OU CLIENTE
 	$dadosboleto["quantidade"] = "";
 	$dadosboleto["valor_unitario"] = "";
-	$dadosboleto["aceite"] = "";		
+	$dadosboleto["aceite"] = "Sim";		
 	$dadosboleto["especie"] = "R$";
 	$dadosboleto["especie_doc"] = "";
 
@@ -548,18 +548,18 @@ $app->get("/boleto/:idorder", function($idorder){
 
 
 	// DADOS DA SUA CONTA - ITAÚ
-	$dadosboleto["agencia"] = "1690"; // Num da agencia, sem digito
-	$dadosboleto["conta"] = "48781";	// Num da conta, sem digito
-	$dadosboleto["conta_dv"] = "2"; 	// Digito do Num da conta
+	$dadosboleto["agencia"] = "0332"; // Num da agencia, sem digito
+	$dadosboleto["conta"] = "11070";	// Num da conta, sem digito
+	$dadosboleto["conta_dv"] = "9"; 	// Digito do Num da conta
 
 	// DADOS PERSONALIZADOS - ITAÚ
 	$dadosboleto["carteira"] = "175";  // Código da Carteira: pode ser 175, 174, 104, 109, 178, ou 157
 
 	// SEUS DADOS
 	$dadosboleto["identificacao"] = "Sahevi Store";
-	$dadosboleto["cpf_cnpj"] = "27.700.750/0001-09";
-	$dadosboleto["endereco"] = "Rua Rua Professor Doutor Nassim Iazigi, 234 - Jardim Aliança, 14050-150";
-	$dadosboleto["cidade_uf"] = "Ribeirão Preto - SP";
+	$dadosboleto["cpf_cnpj"] = "27.709.750/0001-09";
+	$dadosboleto["endereco"] = "Rua Santa Ifigênia, 234 - Santa Efigênia, 01207-001";
+	$dadosboleto["cidade_uf"] = "São Paulo - SP";
 	$dadosboleto["cedente"] = "SAHEVI STORE - ME";
 
 	// NÃO ALTERAR!
