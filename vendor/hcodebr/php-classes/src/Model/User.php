@@ -74,7 +74,7 @@ class User extends Model {
 		{
 			$user = new User();
 
-			//$data['desperson'] = utf8_encode($data['desperson']);
+			$data['desperson'] = utf8_encode($data['desperson']); //alterado com erro em 05/07/19
 
 			$user->setData($data);
 
@@ -168,7 +168,7 @@ class User extends Model {
 			":iduser"=>$this->getiduser(),
 			":desperson"=>$this->getdesperson(),
 			":deslogin"=>$this->getdeslogin(),
-			":despassword"=>$this->getdespassword(),
+			":despassword"=>User::getPasswordHash($this->getdespassword()), //alterado com erros em 05/07/19
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
 			":inadmin"=>$this->getinadmin()
