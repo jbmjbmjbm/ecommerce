@@ -303,11 +303,9 @@ class Cart extends Model {
 		$totals = $this->getProductsTotals();
 
 		$this->setvlsubtotal($totals['vlprice']);
-		$this->setvltotal($totals['vlprice'] + $this->getvlfreight());
+		$this->setvltotal($totals['vlprice'] + (float)$this->getvlfreight());
 	}
 
-
 }
-
 
 ?>

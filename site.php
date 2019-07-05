@@ -253,7 +253,7 @@ $app->post("/checkout", function(){
 		'idaddress'=>$address->getidaddress(),
 		'iduser'=>$user->getiduser(),
 		'idstatus'=>OrderStatus::EM_ABERTO,
-		'vltotal'=> $cart->getvltotal()
+		'vltotal'=>$cart->getvltotal()
 	]);
 
 	$order->save();
@@ -571,7 +571,7 @@ $app->get("/boleto/:idorder", function($idorder){
 
 	});
 
-$app->get("/profile/ordes", function(){
+$app->get("/profile/orders", function(){
 
 	User::verifyLogin(false);
 
@@ -583,7 +583,29 @@ $app->get("/profile/ordes", function(){
 		'orders'=>$user->getOrders()
 	]);
 
+});
 
+$app->get("/profile/orders/:idorder", function($idorder){
+
+	User::verifyLogin(false);
+
+	$order = new Order();
+
+	$order->get((int)$idorder);
+
+	$cart = new Cart();
+
+	$cart->get((int)$order->geidtcart());
+
+	$cart->getCalculateTotal();
+
+	$page = new Page();
+
+	$page->setTpl("profile-orders-detail", [
+		'order'=>$order->getValues(),
+		'cart'=>$cart->getValues(),
+		'products'=>$cart->getProducts()
+	]);
 
 });
 

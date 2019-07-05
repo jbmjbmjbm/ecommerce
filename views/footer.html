@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
-                        <h2>Monteiro Store</h2>
+                        <h2>Sahevi Store</h2>
                         <p>Excelência em vendas pela internet, suas compras com mais segurança,rapidez na entrega e o principal preço justo e qualidade em seus produtos.</p>
                         <div class="footer-social">
                             <a href="https://www.facebook.com/jbmjbmjbm@hotmail.com" target="_blank"><i class="fa fa-facebook"></i></a>
@@ -37,7 +37,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-newsletter">
                         <h2 class="footer-wid-title">Newsletter</h2>
-                        <p>“O sucesso não bate à sua porta. É preciso estabelecer um plano, construí-lo e vendê-lo para mundo. Mas a chave de tudo é ter conhecimento”</p>
+                        <p>“O sucesso não bate à sua porta. É preciso estabelecer um plano, construí-lo e vendê-lo para o mundo. Mas a chave de tudo é ter conhecimento”</p>
                         <div class="newsletter-form">
                             <form action="#">
                                 <input type="email" placeholder="Digite seu email">
@@ -55,7 +55,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright">
-                        <p>&copy; 2019 Monteiro Systemas. <a href="#" target="_blank">monteirophp7@gmail.com</a></p>
+                        <p>&copy; 2019 Sahevi Systemas. <a href="#" target="_blank">contato@saheviostore.tk</a></p>
                     </div>
                 </div>
                 
