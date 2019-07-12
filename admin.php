@@ -26,6 +26,14 @@ $app->get('/admin/login', function(){
 });
 
 $app->post('/admin/login', function(){
+/*try{
+
+		User::login($_POST['login'], $_POST['password']);
+
+	} catch(Exception $e) {
+
+		User::setError($e->getMessage());
+	}*/ // aguardando orientação do suporte.
 
 	User::login($_POST["login"], $_POST["password"]);
 

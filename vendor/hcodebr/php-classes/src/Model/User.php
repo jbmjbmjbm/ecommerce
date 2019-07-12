@@ -74,7 +74,7 @@ class User extends Model {
 		{
 			$user = new User();
 
-			$data['desperson'] = utf8_encode($data['desperson']); //alterado com erro em 05/07/19
+			$data['desperson'] = ($data['desperson']); //alterado com erro em 05/07/19
 
 			$user->setData($data);
 
@@ -129,7 +129,7 @@ class User extends Model {
 		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
 			":desperson"=>$this->getdesperson(),
 			":deslogin"=>$this->getdeslogin(),
-			":despassword"=>User::getPasswordHash($this->getdespassword()),
+			":despassword"=>$this->getdespassword(),
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
 			":inadmin"=>$this->getinadmin()
@@ -151,7 +151,7 @@ class User extends Model {
 
 		$data = $results[0];
 
-		//$data['desperson'] = utf8_encode($data['desperson']);
+		$data['desperson'] = ($data['desperson']);
 
 		$this->setData($data);
 
@@ -166,9 +166,9 @@ class User extends Model {
 
 		$results = $sql->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
 			":iduser"=>$this->getiduser(),
-			":desperson"=>$this->getdesperson(),
+			":desperson"=>($this->getdesperson()),
 			":deslogin"=>$this->getdeslogin(),
-			":despassword"=>User::getPasswordHash($this->getdespassword()), //alterado com erros em 05/07/19
+			":despassword"=>$this->getdespassword(), //alterado com erros em 05/07/19
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
 			":inadmin"=>$this->getinadmin()

@@ -295,6 +295,9 @@ $app->get("/logout", function(){
 
 	User::logout();
 
+	Cart::removeFromSession();
+    session_regenerate_id();
+
 	header("Location: /login");
 	exit;	
 
@@ -595,7 +598,7 @@ $app->get("/profile/orders/:idorder", function($idorder){
 
 	$cart = new Cart();
 
-	$cart->get((int)$order->geidtcart());
+	$cart->get((int)$order->getidcart());
 
 	$cart->getCalculateTotal();
 
@@ -608,6 +611,8 @@ $app->get("/profile/orders/:idorder", function($idorder){
 	]);
 
 });
+
+//Alterar a senha do usuário no site
 
 $app->get("/profile/change-password", function(){
 
@@ -642,7 +647,7 @@ $app->post("/profile/change-password", function(){
 
 	if (!isset($_POST['new_pass_confirm']) || $_POST['new_pass_confirm'] === '') {
 
-		User::setError("Confirme a nova senha atual.");
+		User::setError("Confirme a nova senha.");
 		header("Location: /profile/change-password");
 		exit;
 	}
