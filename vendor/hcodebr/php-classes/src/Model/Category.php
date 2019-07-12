@@ -102,7 +102,7 @@ class Category extends Model {
 		}
 
 	}
-
+	//Metodo de paginação das categorias.
 	public function getProductsPage($page = 1, $itemsPerPage = 3)
 	{
 
