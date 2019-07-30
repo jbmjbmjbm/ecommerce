@@ -156,10 +156,10 @@ $app->get("/checkout", function(){
 
 	$cart = Cart::getFromSession();
 
-	if (isset($_GET['zipcode'])) {
-		$_GET['zipcode'] = $cart->getdeszipcode();
+	//if (isset($_GET['zipcode'])) {
+		//$_GET['zipcode'] = $cart->getdeszipcode();
 
-	}
+	//}
 
 	if (isset($_GET['zipcode'])) {
 
@@ -173,6 +173,7 @@ $app->get("/checkout", function(){
 	}
 
 	if(!$address->getdesaddress()) $address->setdesaddress('');
+	if(!$address->getdesnumber()) $address->setdesnumber('');
 	if(!$address->getdescomplement()) $address->setdescomplement('');
 	if(!$address->getdesdistrict()) $address->setdesdistrict('');
 	if(!$address->getdescity()) $address->setdescity('');
@@ -528,7 +529,7 @@ $app->get("/boleto/:idorder", function($idorder){
 
 	// DADOS DO SEU CLIENTE
 	$dadosboleto["sacado"] = $order->getdesperson();
-	$dadosboleto["endereco1"] = $order->getdesaddress() . " - " . $order->getdesdistrict();
+	$dadosboleto["endereco1"] = $order->getdesaddress() . " - " . $order->getdesnumber() . " - " . $order->getdesdistrict();
 	$dadosboleto["endereco2"] = $order->getdescity() . " - " . $order->getdesstate() . " - " . $order->getdescountry() . " - CEP: " . $order->getdeszipcode();
 
 	// INFORMACOES PARA O CLIENTE

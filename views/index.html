@@ -51,7 +51,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="single-promo promo1">
                         <i class="fa fa-refresh"></i>
-                        <p>1 ano de garantia</p>
+                        <p>0 ano de garantia</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">

@@ -2,7 +2,7 @@
 
 namespace Hcode;
 
-use Rain\tpl;
+use Rain\Tpl;
 
 class Page {
 

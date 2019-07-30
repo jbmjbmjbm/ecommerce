@@ -5,7 +5,7 @@
       Administração
     </div>
     <!-- Default to the left -->
-    <strong>Monteiro &copy; 2019 Sistemas</a>.</strong> Todos os direitos reservados.
+    <strong>SaheviStore &copy; 2019 Sistemas</a>.</strong> Todos os direitos reservados.
   </footer>
 
   <!-- Control Sidebar -->
